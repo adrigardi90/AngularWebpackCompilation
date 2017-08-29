@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/adrigardi90/AngularWebpackCompilation/blob/master/src/images/WebpackAngular.png" alt="Webpack3_configuration" width="215" height="290"/>
+  <img src="https://github.com/adrigardi90/AngularWebpackCompilation/blob/master/src/images/WebpackAngular.png" alt="Webpack3_configuration" width="290" height="290"/>
 </p>
 
 # AngularWebpackCompilation
