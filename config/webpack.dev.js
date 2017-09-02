@@ -1,15 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const ROOT = path.resolve(__dirname, '..');
+const merge = require('webpack-merge');
+const common = require('./webpack.common.js');
+const ROOT = require('./webpack.helper.js').root;
 
 console.log('<- - -  DEVELOPMENT MODE - - ->');
 
-module.exports = {
+module.exports = merge(common, {
 
     devtool: 'source-map',
 
@@ -18,19 +14,12 @@ module.exports = {
     },
 
     entry: {
-        'polyfills': './src/polyfills.ts',
         'app': './src/main.ts'
     },
 
     output: {
-        path: ROOT + '/compiled/',
         filename: 'dist/[name].bundle.js',
-        chunkFilename: 'dist/[id].chunk.js',
-        publicPath: '/'
-    },
-
-    resolve: {
-        extensions: ['.ts', '.js', '.json']
+        chunkFilename: 'dist/[id].chunk.js'
     },
 
     devServer: {
@@ -57,24 +46,6 @@ module.exports = {
             },
 
             {
-                test: /\.(png|jpg|gif|woff|woff2|ttf|svg|eot)$/,
-                use: 'file-loader?name=assets/[name]-[hash:6].[ext]'
-            },
-
-            {
-                test: /favicon.ico$/,
-                use: 'file-loader?name=/[name].[ext]'
-            },
-
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-
-            {
                 test: /\.scss$/,
                 include: [
                     path.join(ROOT, 'src/app/scss'), 
@@ -92,52 +63,11 @@ module.exports = {
                         loader: "sass-loader" // Sass to CSS
                     }
                 ]
-            },
-
-           {
-                test: /\.scss$/,
-                exclude: [path.join(ROOT, 'src/app/scss'),
-                        path.join(ROOT, 'src/styles/')],
-                use: [
-                    'raw-loader',
-                    'sass-loader'
-                ]
-            },
-
-            {
-                test: /\.html$/,
-                use: 'raw-loader'
             }
         ],
-
-        exprContextCritical: false
     },
 
-    plugins: [
+    plugins: []
 
-        new webpack.optimize.CommonsChunkPlugin({ 
-            name: ['vendor', 'polyfills'] 
-        }),
-
-        new CleanWebpackPlugin(
-            [
-                './compiled/dist',
-                './compiled/assets',
-                './compiled'
-            ],
-            { root: ROOT }
-        ),
-
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            inject: 'body',
-            template: 'src/index.html'
-        }),
-
-        new CopyWebpackPlugin([
-            { from: './src/images/*.*', to: 'assets/', flatten: true }
-        ])
-    ]
-
-};
+});
 

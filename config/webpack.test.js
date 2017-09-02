@@ -1,8 +1,7 @@
 ﻿const path = require('path');
 var webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = require('./webpack.helper.js').root;
 
 module.exports = {
 
@@ -31,7 +30,7 @@ module.exports = {
       // Rule to coverage reporter ts files with istanbul
       {
         test: /\.ts/,
-        include: path.join(__dirname, '..', 'src', 'app'),
+        include: path.join(ROOT 'src', 'app'),
         loader: 'istanbul-instrumenter-loader',
         query: {
           esModules: true
