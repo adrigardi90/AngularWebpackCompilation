@@ -9,9 +9,7 @@
     "build-production": "npm run webpack-production",
     "build-dev": "npm run webpack-dev",
     "serve": "http-server -p 3000 compiled/",
-    "start": "webpack-dev-server --content-base src/ --env=dev --hot --inline --port 8080",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start": "webpack-dev-server --content-base src/ --env=dev --hot --inline --port 8080"
   },
   "private": true,
   "dependencies": {
