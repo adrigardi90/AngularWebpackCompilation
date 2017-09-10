@@ -9,8 +9,12 @@ const appRoutes: Routes = [
     path: 'home',
     loadChildren: './modules/home/home.module#HomeModule'
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: '**', redirectTo: '/login'}
+  { path: '', 
+    redirectTo: '/login', 
+    pathMatch: 'full'
+  },
+  { path: '**', 
+    redirectTo: '/login'}
 ];
 
 @NgModule({
